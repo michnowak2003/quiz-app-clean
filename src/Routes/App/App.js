@@ -18,6 +18,7 @@ function App() {
                                     subtitle={`Rozdział ${index+1}`}
                                     title={chapter.title}
                                     completedText={''}
+                                    key={index}
                                 />
                         ))}
                 </nav>

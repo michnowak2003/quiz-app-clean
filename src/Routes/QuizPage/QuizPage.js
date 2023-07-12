@@ -1,7 +1,7 @@
 import './QuizPage.scss';
 import Question from "../../Components/Question";
 import { StateContext } from '../../stateContext';
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import ProgressBar from "../../Components/ProgressBar/ProgressBar";
@@ -25,6 +25,7 @@ function QuizPage() {
             case 'back':
                 if (questionNumber > 0) {
                     setQuestionNumber(prev => prev - 1);
+                    navigate(`/quiz-page/${chapterId}/${questionNumber -1}`)
         } else {
                     navigate('/')
                 }
@@ -33,7 +34,8 @@ function QuizPage() {
             case 'next':
                 if (questionNumber < chapter.questions.length - 1) {
                     setQuestionNumber(prev => prev + 1);
-        }else {
+                    navigate(`/quiz-page/${chapterId}/${questionNumber + 1}`)
+        } else {
     navigate('/summary-page/' + chapterId)
                 }
         }
@@ -42,15 +44,12 @@ function QuizPage() {
     <div className="quiz-page">
         <ProgressBar currentValue={questionNumber + 1} maxValue={chapter.questions.length}/>
         <Question
-            question={chapter.questions[questionNumber].question}
-            answers={chapter.questions[questionNumber].answers}
-            correctAnswer={chapter.questions[questionNumber].correctAnswer}
             chapterIndex={chapterId}
             questionIndex={questionNumber}
         />
         <div className={'quiz-page__buttons'}>
-            <Button type={'secondary'} onClick={() => handleButtonClick('back')}> Cofnij</Button>
-            <Button type={'primary'} onClick={() => handleButtonClick('next')}>Dalej</Button>
+            <Button type={'secondary'} onClick={() => handleButtonClick('back')}><span>Cofnij</span></Button>
+            <Button type={'primary'} onClick={() => handleButtonClick('next')}><span>Dalej</span></Button>
         </div>
     </div>
   );

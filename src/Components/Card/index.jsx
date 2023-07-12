@@ -17,7 +17,7 @@ const Card = ({ image, title, subtitle, buttonText, completedText, linkTo }) => 
                 <h2 className="card-container__content__title">{title}</h2>
                 <p className="card-container__content__subtitle">{subtitle}</p>
                 <Link to={linkTo}>
-                    <Button type={'primary'}>{buttonText}</Button>
+                    <Button type={'primary'} className={"card-container__button"}><span>{buttonText}</span></Button>
                 </Link>
 
             </div>

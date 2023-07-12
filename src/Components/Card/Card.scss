@@ -4,11 +4,8 @@
   box-sizing: border-box;
   position: relative;
   margin-bottom: 1.5rem;
-  max-width: 342px;
+  overflow: hidden;
   &__image-wrapper {
-    &__image {
-    margin: -1px -1px;
-  }
     &__completed-text {
       position: absolute;
       top: 10px;
@@ -33,5 +30,8 @@
     &__subtitle {
       margin-bottom: 16px;
     }
+  }
+  &__button {
+    width: 100%;
   }
 }

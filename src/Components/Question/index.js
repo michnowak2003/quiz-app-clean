@@ -1,14 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Question.scss';
 import {StateContext} from "../../stateContext";
 
-const Question = ({ question, answers, correctAnswer, chapterIndex, questionIndex }) => {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
+const Question = ({ chapterIndex, questionIndex }) => {
+
+    const [ selectedAnswer, setSelectedAnswer ] = useState(null);
     let state = useContext(StateContext);
+    let question = state.chapters[chapterIndex].questions[questionIndex];
+
     const handleAnswerSelection = (index) => {
-        setSelectedAnswer(index);
-        //TODO refactor this
-        state.chapters[chapterIndex].questions[questionIndex] = {...state.chapters[chapterIndex].questions[questionIndex], selectedAnswer: index, isSelectedAnswerCorrect: selectedAnswer == state.chapters[chapterIndex].questions[questionIndex].correctAnswer};
+        setSelectedAnswer(index)
+        question.selectedAnswer = index;
     };
 
     const isAnswerCorrect = (index) => {
@@ -21,18 +23,18 @@ const Question = ({ question, answers, correctAnswer, chapterIndex, questionInde
 
     return (
         <div className="question-container">
-            <h3 className="question-container__question">{question}</h3>
+            <h3 className="question-container__question">{question.question}</h3>
             <ul className="question-container__answers">
-                {answers.map((answer, index) => (
+                {question.answers.map((answer, index) => (
                     <li
                         key={index}
-                        className={`question-container__answer ${selectedAnswer === index ? 'selected' : ''} ${isAnswerCorrect(index) ? 'correct' : ''} ${isAnswerIncorrect(index) ? 'incorrect' : ''}`}
+                        className={`question-container__answer ${question.selectedAnswer === index ? 'selected' : ''} ${isAnswerCorrect(index) ? 'correct' : ''} ${isAnswerIncorrect(index) ? 'incorrect' : ''}`}
                         onClick={() => handleAnswerSelection(index)}
                     >
                         <input
                             type="radio"
                             name="answer"
-                            checked={selectedAnswer === index}
+                            checked={question.selectedAnswer === index}
                             readOnly
                         />
                         {answer}

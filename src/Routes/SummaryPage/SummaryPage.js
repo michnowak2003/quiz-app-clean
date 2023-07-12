@@ -10,6 +10,16 @@ function SummaryPage() {
     let { chapterId } = useParams();
     let state = useContext(StateContext);
 
+    const validatePoints = () => {
+        let score = 0;
+        state.chapters[chapterId].questions.forEach(question => {
+            if(question.selectedAnswer == question.correctAnswer) {
+                score++;
+            }
+        })
+        return score;
+    }
+
 
     const handleButtonClick = (type) => {
         switch (type) {
@@ -23,10 +33,10 @@ function SummaryPage() {
     };
   return (
     <div className="quiz-page">
-        <Summary points={10} maxPoints={state.chapters[chapterId].questions.length}/>
+        <Summary points={validatePoints()} maxPoints={state.chapters[chapterId].questions.length}/>
         <div className={'quiz-page__buttons'}>
-            <Button type={'secondary'} onClick={() => handleButtonClick('back')}> Cofnij</Button>
-            <Button type={'primary'} onClick={() => handleButtonClick('tryAgain')}>Powtórz quiz</Button>
+            <Button type={'secondary'} onClick={() => handleButtonClick('back')}><span>Cofnij</span></Button>
+            <Button type={'primary'} onClick={() => handleButtonClick('tryAgain')}><span>Powtórz quiz</span></Button>
         </div>
     </div>
   );
