@@ -1,0 +1,25 @@
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.summary-container__image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 34px;
+}
+
+.summary-container__title {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+
+.summary-container__info {
+  margin: 0;
+  font-size: 20px;
+  &__points {
+    color: #407BFF;
+  }
+}

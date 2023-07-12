@@ -1,0 +1,20 @@
+.quiz-page {
+  padding: 1.5rem;
+  height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  &__buttons {
+    margin-top: auto;
+    display: flex;
+    & > * {
+      flex-grow: 1;
+      margin: 0 4px;
+    }
+    & > *:first-child {
+      margin-left: 0;
+    }
+    & > *:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.button {
+  padding: 16px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  &.primary {
+    color: #FFFFFF;
+    background-color: #2F80ED;
+  }
+
+  &.secondary {
+    color: #000000;
+    background-color: #F2F2F2;
+  }
+}
