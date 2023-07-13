@@ -6,6 +6,16 @@ import { StateContext } from '../../stateContext';
 function App() {
     let state = useContext(StateContext);
 
+    const checkIsCompleted = (questions) => {
+        let answeredQuestion = 0;
+        const maxAnsweredQuestion = questions.length;
+        questions.forEach((question) => {
+            if(question.selectedAnswer) {
+                answeredQuestion++
+            }
+        })
+        return answeredQuestion === maxAnsweredQuestion;
+    };
   return (
     <div className="App">
             <div>
@@ -17,7 +27,7 @@ function App() {
                                     linkTo={`/quiz-page/${index}/0`}
                                     subtitle={`Rozdział ${index+1}`}
                                     title={chapter.title}
-                                    completedText={''}
+                                    completedText={checkIsCompleted(chapter.questions) ? 'Ukończone' : ''}
                                     key={index}
                                 />
                         ))}

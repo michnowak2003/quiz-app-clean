@@ -20,23 +20,38 @@ function SummaryPage() {
         return score;
     }
 
+    const resetAnswers = () => {
+        state.chapters[chapterId].questions.forEach(question => {
+            question.selectedAnswer = null;
+            question.showAnswer = false;
+        })
+    }
+
+    const showAnswers = () => {
+        state.chapters[chapterId].questions.forEach(question => {
+            question.showAnswer = true;
+        })
+    }
+
 
     const handleButtonClick = (type) => {
         switch (type) {
-            case 'back':
-               navigate(`/quiz-page/${chapterId}/${state.chapters[chapterId].questions.length-1}`)
+            case 'checkAnswers':
+               navigate(`/quiz-page/${chapterId}/0`)
+                showAnswers()
                 break;
 
             case 'tryAgain':
                 navigate(`/quiz-page/${chapterId}/0`)
+                resetAnswers()
         }
     };
   return (
     <div className="quiz-page">
         <Summary points={validatePoints()} maxPoints={state.chapters[chapterId].questions.length}/>
-        <div className={'quiz-page__buttons'}>
-            <Button type={'secondary'} onClick={() => handleButtonClick('back')}><span>Cofnij</span></Button>
-            <Button type={'primary'} onClick={() => handleButtonClick('tryAgain')}><span>Powtórz quiz</span></Button>
+        <div className={'summary-page__buttons'}>
+            <Button type={'primary'} onClick={() => handleButtonClick('checkAnswers')}><span>Sprawdź odpowiedzi</span></Button>
+            <Button type={'secondary'} className={'summary-page__buttons--margin-top'} onClick={() => handleButtonClick('tryAgain')}><span>Powtórz Quiz</span></Button>
         </div>
     </div>
   );

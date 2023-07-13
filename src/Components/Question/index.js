@@ -3,22 +3,23 @@ import './Question.scss';
 import {StateContext} from "../../stateContext";
 
 const Question = ({ chapterIndex, questionIndex }) => {
-
-    const [ selectedAnswer, setSelectedAnswer ] = useState(null);
     let state = useContext(StateContext);
     let question = state.chapters[chapterIndex].questions[questionIndex];
+    const [ selectedAnswer, setSelectedAnswer ] = useState(question.selectedAnswer);
+
+    const correctAnswer = question.correctAnswer;
 
     const handleAnswerSelection = (index) => {
         setSelectedAnswer(index)
         question.selectedAnswer = index;
     };
 
-    const isAnswerCorrect = (index) => {
-        //return selectedAnswer === index && selectedAnswer === correctAnswer;
+    const isAnswerCorrect = (showAnswer,index) => {
+        return showAnswer && index  === correctAnswer;
     };
 
-    const isAnswerIncorrect = (index) => {
-        //return selectedAnswer === index && selectedAnswer !== correctAnswer;
+    const isAnswerIncorrect = (showAnswer, index) => {
+        return showAnswer && (selectedAnswer === index) && selectedAnswer !== correctAnswer;
     };
 
     return (
@@ -28,7 +29,7 @@ const Question = ({ chapterIndex, questionIndex }) => {
                 {question.answers.map((answer, index) => (
                     <li
                         key={index}
-                        className={`question-container__answer ${question.selectedAnswer === index ? 'selected' : ''} ${isAnswerCorrect(index) ? 'correct' : ''} ${isAnswerIncorrect(index) ? 'incorrect' : ''}`}
+                        className={`question-container__answer ${question.selectedAnswer === index ? 'selected' : ''} ${isAnswerCorrect(question.showAnswer, index) ? 'correct' : ''} ${isAnswerIncorrect(question.showAnswer, index) ? 'incorrect' : ''}`}
                         onClick={() => handleAnswerSelection(index)}
                     >
                         <input
