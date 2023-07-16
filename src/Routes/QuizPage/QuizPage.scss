@@ -1,8 +1,13 @@
 .quiz-page {
-  padding: 1.5rem;
-  height: calc(100vh - 3rem);
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    padding: 1.5rem;
+  }
   &__buttons {
     margin-top: auto;
     display: flex;

@@ -10,7 +10,7 @@ const Button = ({ type, children, onClick, className}) => {
 };
 
 Button.propTypes = {
-  type: PropTypes.oneOf(["primary", "secondary"]).isRequired,
+  type: PropTypes.oneOf(["primary", "secondary", "icon"]).isRequired,
   children: PropTypes.element.isRequired
 };
 export default Button;

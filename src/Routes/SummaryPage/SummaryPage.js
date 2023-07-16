@@ -29,6 +29,7 @@ function SummaryPage() {
 
     const showAnswers = () => {
         state.chapters[chapterId].questions.forEach(question => {
+
             question.showAnswer = true;
         })
     }

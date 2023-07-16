@@ -5,6 +5,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import ProgressBar from "../../Components/ProgressBar/ProgressBar";
+import Navbar from "../../Components/Navbar/Navbar";
 
 function QuizPage() {
     const navigate = useNavigate();
@@ -42,7 +43,11 @@ function QuizPage() {
     };
   return (
     <div className="quiz-page">
-        <ProgressBar currentValue={questionNumber + 1} maxValue={chapter.questions.length}/>
+        <Navbar>
+            <ProgressBar currentValue={questionNumber + 1} maxValue={chapter.questions.length}/>
+        </Navbar>
+        <div className={'quiz-page__content'}>
+
         <Question
             chapterIndex={chapterId}
             questionIndex={questionNumber}
@@ -50,6 +55,7 @@ function QuizPage() {
         <div className={'quiz-page__buttons'}>
             <Button type={'secondary'} onClick={() => handleButtonClick('back')}><span>Cofnij</span></Button>
             <Button type={'primary'} onClick={() => handleButtonClick('next')}><span>Dalej</span></Button>
+        </div>
         </div>
     </div>
   );
