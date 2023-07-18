@@ -8,13 +8,23 @@ function App() {
 
     const checkIsCompleted = (questions) => {
         let answeredQuestion = 0;
+        let correctAnswers = 0;
         const maxAnsweredQuestion = questions.length;
         questions.forEach((question) => {
             if(question.selectedAnswer) {
+                if(question.selectedAnswer === question.correctAnswer) {
+                    correctAnswers++
+                }
                 answeredQuestion++
             }
         })
-        return answeredQuestion === maxAnsweredQuestion;
+        if(correctAnswers === maxAnsweredQuestion) {
+            return 'Ukończone';
+        } else if (answeredQuestion) {
+            return 'Do poprawy'
+        } else {
+            return null
+        }
     };
   return (
     <div className="App">
@@ -27,7 +37,7 @@ function App() {
                                     linkTo={`/quiz-page/${index}/0`}
                                     subtitle={`Rozdział ${index+1}`}
                                     title={chapter.title}
-                                    completedText={checkIsCompleted(chapter.questions) ? 'Ukończone' : ''}
+                                    completedText={checkIsCompleted(chapter.questions)}
                                     key={index}
                                 />
                         ))}

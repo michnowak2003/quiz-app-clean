@@ -10,7 +10,7 @@ const Card = ({ image, title, subtitle, buttonText, completedText, linkTo }) => 
             <div className="card-container__image-wrapper">
                 <img src={image} alt="Zdjęcie" className="card-container__image-wrapper__image" />
                 {completedText && (
-                    <div className="card-container__image-wrapper__completed-text">{completedText}</div>
+                    <div className={`card-container__image-wrapper__completed-text ${completedText !=='Ukończone' ? 'card-container__image-wrapper__completed-text--warning': ''}`}>{completedText}</div>
                 )}
             </div>
             <div className="card-container__content">

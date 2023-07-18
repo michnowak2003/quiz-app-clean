@@ -19,7 +19,7 @@ const Question = ({ chapterIndex, questionIndex }) => {
     };
 
     const isAnswerIncorrect = (showAnswer, index) => {
-        return showAnswer && (selectedAnswer === index) && selectedAnswer !== correctAnswer;
+        return showAnswer && question.selectedAnswer === index && index!== correctAnswer;
     };
 
     return (
@@ -30,13 +30,14 @@ const Question = ({ chapterIndex, questionIndex }) => {
                     <li
                         key={index}
                         className={`question-container__answer ${question.selectedAnswer === index ? 'selected' : ''} ${isAnswerCorrect(question.showAnswer, index) ? 'correct' : ''} ${isAnswerIncorrect(question.showAnswer, index) ? 'incorrect' : ''}`}
-                        onClick={() => handleAnswerSelection(index)}
+                        onClick={() => !question.showAnswer && handleAnswerSelection(index)}
                     >
                         <input
                             type="radio"
                             name="answer"
                             checked={question.selectedAnswer === index}
                             readOnly
+                            disabled={question.showAnswer}
                         />
                         {answer}
                     </li>

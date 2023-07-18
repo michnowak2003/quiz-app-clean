@@ -1,9 +1,11 @@
 import './SummaryPage.scss';
 import { StateContext } from '../../stateContext';
-import {useContext, useEffect, useRef} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import Summary from "../../Components/Summary";
+import Navbar from "../../Components/Navbar/Navbar";
+import ProgressBar from "../../Components/ProgressBar/ProgressBar";
 
 function SummaryPage() {
     const navigate = useNavigate();
@@ -29,7 +31,6 @@ function SummaryPage() {
 
     const showAnswers = () => {
         state.chapters[chapterId].questions.forEach(question => {
-
             question.showAnswer = true;
         })
     }
@@ -48,7 +49,9 @@ function SummaryPage() {
         }
     };
   return (
-    <div className="quiz-page">
+    <div className="summary-page">
+        <Navbar>
+        </Navbar>
         <Summary points={validatePoints()} maxPoints={state.chapters[chapterId].questions.length}/>
         <div className={'summary-page__buttons'}>
             <Button type={'primary'} onClick={() => handleButtonClick('checkAnswers')}><span>Sprawdź odpowiedzi</span></Button>
