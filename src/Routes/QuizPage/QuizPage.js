@@ -19,7 +19,7 @@ function QuizPage() {
         if(questionNumberParams) {
             setQuestionNumber(parseInt(questionNumberParams));
         }
-    },[])
+    },[questionNumberParams])
 
     const handleButtonClick = (type) => {
         switch (type) {
@@ -39,6 +39,10 @@ function QuizPage() {
         } else {
     navigate('/summary-page/' + chapterId)
                 }
+                break;
+                default:
+                    break;
+
         }
     };
   return (

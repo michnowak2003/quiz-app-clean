@@ -5,25 +5,23 @@ import { StateContext } from '../../stateContext';
 
 function App() {
     let state = useContext(StateContext);
+    const localScores = JSON.parse(localStorage.getItem("scores"));
 
-    const checkIsCompleted = (questions) => {
-        let answeredQuestion = 0;
-        let correctAnswers = 0;
+    const checkIsCompleted = (questions, chapterId) => {
         const maxAnsweredQuestion = questions.length;
-        questions.forEach((question) => {
-            if(question.selectedAnswer) {
-                if(question.selectedAnswer === question.correctAnswer) {
-                    correctAnswers++
+        if(localScores) {
+            const chapterScore = localScores.find((chapter) => {
+                return parseInt(chapter.id) === chapterId;
+            });
+            if (chapterScore) {
+                if (chapterScore.correctAnswers === maxAnsweredQuestion) {
+                    return 'Ukończone';
+                } else if (chapterScore.answeredQuestion) {
+                    return 'Do poprawy'
+                } else {
+                    return null
                 }
-                answeredQuestion++
             }
-        })
-        if(correctAnswers === maxAnsweredQuestion) {
-            return 'Ukończone';
-        } else if (answeredQuestion) {
-            return 'Do poprawy'
-        } else {
-            return null
         }
     };
   return (
@@ -36,7 +34,7 @@ function App() {
                                     buttonText={'Rozpocznij'}
                                     linkTo={`/quiz-page/${index}/0`}
                                     subtitle={`Rozdział ${index+1}`}
-                                    completedText={checkIsCompleted(chapter.questions)}
+                                    completedText={checkIsCompleted(chapter.questions, index)}
                                     key={index}
                                     chapterId={index}
                                 />

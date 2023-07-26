@@ -1,7 +1,7 @@
 export const validatePoints = (state, chapterId) => {
     let score = 0;
     state.chapters[chapterId].questions.forEach(question => {
-        if(question.selectedAnswer == question.correctAnswer) {
+        if(question.selectedAnswer === question.correctAnswer) {
             score++;
         }
     })
