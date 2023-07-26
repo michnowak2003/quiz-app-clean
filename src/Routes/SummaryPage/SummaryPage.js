@@ -5,54 +5,31 @@ import {useParams, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import Summary from "../../Components/Summary";
 import Navbar from "../../Components/Navbar/Navbar";
-import ProgressBar from "../../Components/ProgressBar/ProgressBar";
-
+import { showAnswers, resetAnswers, validatePoints } from "../../utils/answerUtils";
 function SummaryPage() {
     const navigate = useNavigate();
     let { chapterId } = useParams();
     let state = useContext(StateContext);
 
-    const validatePoints = () => {
-        let score = 0;
-        state.chapters[chapterId].questions.forEach(question => {
-            if(question.selectedAnswer == question.correctAnswer) {
-                score++;
-            }
-        })
-        return score;
-    }
-
-    const resetAnswers = () => {
-        state.chapters[chapterId].questions.forEach(question => {
-            question.selectedAnswer = null;
-            question.showAnswer = false;
-        })
-    }
-
-    const showAnswers = () => {
-        state.chapters[chapterId].questions.forEach(question => {
-            question.showAnswer = true;
-        })
-    }
 
 
     const handleButtonClick = (type) => {
         switch (type) {
             case 'checkAnswers':
                navigate(`/quiz-page/${chapterId}/0`)
-                showAnswers()
+                showAnswers(state, chapterId)
                 break;
 
             case 'tryAgain':
                 navigate(`/quiz-page/${chapterId}/0`)
-                resetAnswers()
+                resetAnswers(state, chapterId)
         }
     };
   return (
     <div className="summary-page">
         <Navbar>
         </Navbar>
-        <Summary points={validatePoints()} maxPoints={state.chapters[chapterId].questions.length}/>
+        <Summary points={validatePoints(state, chapterId)} maxPoints={state.chapters[chapterId].questions.length}/>
         <div className={'summary-page__buttons'}>
             <Button type={'primary'} onClick={() => handleButtonClick('checkAnswers')}><span>Sprawdź odpowiedzi</span></Button>
             <Button type={'secondary'} className={'summary-page__buttons--margin-top'} onClick={() => handleButtonClick('tryAgain')}><span>Powtórz Quiz</span></Button>

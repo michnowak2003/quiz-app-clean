@@ -32,13 +32,13 @@ function App() {
                 <nav>
                         {state.chapters?.map((chapter, index) => (
                                 <Card
-                                    image={chapter.image}
+                                    chapter={chapter}
                                     buttonText={'Rozpocznij'}
                                     linkTo={`/quiz-page/${index}/0`}
                                     subtitle={`Rozdział ${index+1}`}
-                                    title={chapter.title}
                                     completedText={checkIsCompleted(chapter.questions)}
                                     key={index}
+                                    chapterId={index}
                                 />
                         ))}
                 </nav>

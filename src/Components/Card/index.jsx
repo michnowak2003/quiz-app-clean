@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import './Card.scss';
 import Button from "../Button/Button";
 import {Link} from "react-router-dom";
+import {resetAnswers} from "../../utils/answerUtils";
+import {StateContext} from "../../stateContext";
 
-const Card = ({ image, title, subtitle, buttonText, completedText, linkTo }) => {
+const Card = ({ chapter, subtitle, buttonText, completedText, linkTo, chapterId }) => {
+    let state = useContext(StateContext);
+
+    const {image, title } = chapter;
     return (
         <div className="card-container">
             <div className="card-container__image-wrapper">
@@ -16,7 +21,7 @@ const Card = ({ image, title, subtitle, buttonText, completedText, linkTo }) => 
             <div className="card-container__content">
                 <h2 className="card-container__content__title">{title}</h2>
                 <p className="card-container__content__subtitle">{subtitle}</p>
-                <Link to={linkTo}>
+                <Link to={linkTo} onClick={()=> resetAnswers(state, chapterId)}>
                     <Button type={'primary'} className={"card-container__button"}><span>{buttonText}</span></Button>
                 </Link>
 
@@ -26,8 +31,6 @@ const Card = ({ image, title, subtitle, buttonText, completedText, linkTo }) => 
 };
 
 Card.propTypes = {
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     buttonText: PropTypes.string.isRequired,
     completedText: PropTypes.string,
