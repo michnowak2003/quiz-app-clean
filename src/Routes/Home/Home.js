@@ -1,12 +1,22 @@
 import './App.scss';
 import Card from "../../Components/Card";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import { StateContext } from '../../stateContext';
+import {useChaptersFromFirebase} from "../../utils/firebase";
 
-function App() {
+function Home() {
     let state = useContext(StateContext);
     const localScores = JSON.parse(localStorage.getItem("scores"));
 
+    const [fetchedData, setFetchedData] = useState(null);
+    const chapters = useChaptersFromFirebase();
+    useEffect(() => {
+        if (chapters) {
+            setFetchedData(chapters);
+        }
+    }, [chapters]);
+
+    state.chapters = fetchedData;
     const checkIsCompleted = (questions, chapterId) => {
         const maxAnsweredQuestion = questions.length;
         if(localScores) {
@@ -46,4 +56,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
