@@ -38,6 +38,7 @@ const Question = ({ chapterIndex, questionIndex }) => {
                             checked={question.selectedAnswer === index}
                             readOnly
                             disabled={question.showAnswer}
+                            onClick={() => !question.showAnswer && handleAnswerSelection(index)}
                         />
                         {answer}
                     </li>
