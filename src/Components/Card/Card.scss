@@ -7,6 +7,10 @@
   overflow: hidden;
   max-width: 342px;
   &__image-wrapper {
+    &__image-placeholder {
+      height: 183px;
+      width:342px;
+    }
     &__completed-text {
       position: absolute;
       top: 10px;

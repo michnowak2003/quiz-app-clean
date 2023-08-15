@@ -13,7 +13,9 @@ const Card = ({ chapter, subtitle, buttonText, completedText, linkTo, chapterId 
     return (
         <div className="card-container">
             <div className="card-container__image-wrapper">
-                <img src={image} alt="Zdjęcie" className="card-container__image-wrapper__image" />
+                {image ?  <img src={image} alt="Zdjęcie" className="card-container__image-wrapper__image" /> :
+                <div className="card-container__image-wrapper__image-placeholder"></div>
+                }
                 {completedText && (
                     <div className={`card-container__image-wrapper__completed-text ${completedText !=='Ukończone' ? 'card-container__image-wrapper__completed-text--warning': ''}`}>{completedText}</div>
                 )}
