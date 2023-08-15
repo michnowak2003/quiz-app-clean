@@ -46,7 +46,6 @@ function QuizPage() {
         }
     };
   return (
-      <div className="desktop-container">
     <div className="quiz-page">
         <Navbar>
             <ProgressBar currentValue={questionNumber + 1} maxValue={chapter.questions.length}/>
@@ -63,7 +62,6 @@ function QuizPage() {
         </div>
         </div>
     </div>
-      </div>
   );
 }
 

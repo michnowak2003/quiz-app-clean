@@ -1,12 +1,25 @@
 .quiz-page {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width:53rem;
+  margin: 0 auto;
+  height: 100vh;
+  @media (min-width: 640px) {
+    padding: 1.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 2rem;
+    height: auto;
+    min-width: 53rem;
+  }
   &__content {
     display: flex;
     flex-direction: column;
-    height:100%;
+    min-height:28rem;
     padding: 1.5rem;
+    height: 100vh;
+    @media (min-width: 640px) {
+      height: auto;
+    }
   }
   &__buttons {
     margin-top: auto;

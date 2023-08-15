@@ -36,8 +36,7 @@ function Home() {
     };
   return (
     <div className="App">
-            <div>
-                <nav>
+
                         {state.chapters?.map((chapter, index) => (
                                 <Card
                                     chapter={chapter}
@@ -49,9 +48,6 @@ function Home() {
                                     chapterId={index}
                                 />
                         ))}
-                </nav>
-            </div>
-
     </div>
   );
 }
