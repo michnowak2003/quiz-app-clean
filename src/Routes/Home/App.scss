@@ -1,9 +1,10 @@
 .App {
-  padding: 1.5rem;
   height: calc(100vh - 3rem);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
     @media (min-width: 640px) {
-     display: flex;
-      flex-wrap: wrap;
       & > * {
         margin-right: 1.5rem;
     }

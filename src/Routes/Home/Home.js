@@ -3,6 +3,7 @@ import Card from "../../Components/Card";
 import {useContext, useEffect, useState} from "react";
 import { StateContext } from '../../stateContext';
 import {useChaptersFromFirebase} from "../../utils/firebase";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 function Home() {
     let state = useContext(StateContext);
@@ -36,8 +37,7 @@ function Home() {
     };
   return (
     <div className="App">
-
-                        {state.chapters?.map((chapter, index) => (
+                        {state.chapters ? state.chapters?.map((chapter, index) => (
                                 <Card
                                     chapter={chapter}
                                     buttonText={'Rozpocznij'}
@@ -47,7 +47,7 @@ function Home() {
                                     key={index}
                                     chapterId={index}
                                 />
-                        ))}
+                        )): <LoadingSpinner/>}
     </div>
   );
 }
